@@ -1,4 +1,10 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+group = 'com.github.xm0625'
+version = 'master-SNAPSHOT'
 
 android {
     compileSdkVersion 31
@@ -31,4 +37,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.xm0625'
+                artifactId = 'Auto.js-Plugin-SDK'
+                version = 'master-SNAPSHOT'
+            }
+        }
+    }
 }
